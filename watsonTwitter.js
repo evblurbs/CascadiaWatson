@@ -24,7 +24,7 @@ var getMood = function(results) {
         sum.joy += results[i].tone.joy;
         sum.sadness = results[i].tone.sadness;
     }
-    
+
     var averages = [
       {
           id: "anger",
@@ -47,7 +47,7 @@ var getMood = function(results) {
           average: sum.sadness / results.length
       }
     ];
-    
+
     averages.sort(function(a, b) {
         return b.average - a.average;
     });
@@ -55,16 +55,16 @@ var getMood = function(results) {
 }
 
 var getTweets = function(res) {
-    client.get('search/tweets', {q: '%23cascadia16'}, function(error, tweets, response) {
+    client.get('search/tweets', {q: '%23hackunl'}, function(error, tweets, response) {
         var formattedTweets = tweets.statuses.map(function(status) {
-            // console.log(status); 
+            // console.log(status);
             return {
                 text: status.text,
                 user: status.user.screen_name,
                 avatar: status.user.profile_image_url_https
             };
         });
-        
+
         var results = async.map(formattedTweets, cascadiaWatson.analyzeTweet, function (e, r){
             var mood = getMood(r);
             res.send(JSON.stringify({

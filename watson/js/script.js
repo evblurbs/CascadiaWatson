@@ -5,7 +5,7 @@ $(function(){
            $("#twitterMood").attr("src", "img/" + data['mood'] + ".svg");
            $("#moodTitle").text(data["mood"]);
            tweets = data["results"];
-           
+
            var results = '';
             tweets.map(function(tweet){
                 results += twitterCard(tweet.text, tweet.user, tweet.avatar, tweet.mood);
@@ -13,12 +13,12 @@ $(function(){
             $("#tweetdeck").html(results);
         });
     }
-    
+
     getMood();
     setInterval(function() {
       getMood();
     }, 10000);
-    
+
     function twitterCard(tweet, tweeter, avatar, mood) {
         var tweetTemplate = "<img src=\"img/" + mood + ".svg\" class=\"twitter-mood\" ><div class=\"panel panel-default\"><div class=\"panel-body\"><div class=\"media\">"
             + "<div class=\"media-left\"><a href=\"#\"><img class=\"media-object img-thumbnail\" src=\"" + avatar + "\" ></a></div>"

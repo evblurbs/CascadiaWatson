@@ -32,7 +32,7 @@ function getMood(moods) {
       value: moods.sadness
     }
   ];
-  
+
   results.sort(function(a, b) {
     return b.value - a.value;
   });
@@ -48,11 +48,12 @@ var cascadiaWatson = {
           console.log(err);
         else
           var returnObj = {};
+          console.log('tone', tone)
           var tweetTones = tone.document_tone.tone_categories[0].tones;
           for(var i = 0; i < 5; i++) {
             var id = tweetTones[i].tone_id;
             var score = tweetTones[i].score;
-            
+
             returnObj[id] = tweetTones[i].score;
           }
           tweet.tone = returnObj;
